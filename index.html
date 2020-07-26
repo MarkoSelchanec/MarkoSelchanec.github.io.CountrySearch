@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <div class="main-div hide">
+    <div class="main-div">
 
         <h1 class="title">
             <span>c</span><span>o</span><span>u</span><span>n</span><span>t</span><span>r</span><span>y</span>
@@ -19,20 +19,36 @@
         <div class="search-div">
             <img src="img/search-solid.svg" alt="search icon" class="search-ico filter">
             <input type="text" spellcheck="false" class="search-bar">
+            <div class="search-content hide">
+
+                <div class="search-query">
+
+                </div>
+
+                <div>
+                    <button class="btn" id="country-search">country search</button>
+                    <button class="btn">surprise me!</button>
+                </div>
+                
+            </div>
         </div>
 
         <div class="button-div">
-            <button class="btn">country search</button>
+            <button class="btn" id="country-search">country search</button>
             <button class="btn">surprise me!</button>
         </div>
         
     </div>
 
-    <div class="content-div">
+    <div class="content-div hide">
         
         <div class="country-intro basic-setup">
             <img src="" alt="country flag" id="country-flag" class="country-flag">
             <h1 id="country-name" class="country-name"></h1>
+        </div>
+
+        <div class="capital basic-setup">
+            <h2></h2>
         </div>
         
         <div class="country-info basic-setup">
@@ -48,20 +64,10 @@
         <div class="borders basic-setup">
             <h3>Borders: </h3>
             <div class="borders-div">
-
+                
             </div>
         </div>
 
-
-
-
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <img class="test" src="" alt="">
     </div>
     
     <script src="script.js"></script>
