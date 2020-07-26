@@ -3,10 +3,12 @@ const title = document.getElementsByClassName("title")[0];
 const searchBar = document.getElementsByClassName("search-bar")[0];
 const searchContent = document.getElementsByClassName("search-content")[0];
 const searchQuery = document.getElementsByClassName("search-query")[0];
-const searchBtn = document.getElementById("country-search")
+const searchBtn = document.getElementById("country-search");
+const randBtn = document.getElementsByClassName("random-btn");
 const link = "https://restcountries.eu/rest/v2/all";
 
 const contentPage = document.getElementsByClassName("content-div")[0];
+const bckBtn = document.getElementsByClassName("back-btn")[0];
 const countryName = document.getElementById("country-name");
 const countryFlag = document.getElementById("country-flag");
 const countryCapital = document.getElementsByClassName("capital")[0].getElementsByTagName("h2")[0];
@@ -16,7 +18,7 @@ const countryBorders = document.getElementsByClassName("borders-div")[0];
 
 let data = [];
 
-let getData = async (link) => {
+(async (link) => {
     const res = await fetch(link);
 
     const final = await res.json();
@@ -24,16 +26,12 @@ let getData = async (link) => {
     final.forEach(e => {
         data.push(e)
     });
-}
+})(link);
 
-getData(link)
-setTimeout(() => {
-    console.log(data) 
-}, 2000);
 
 // Home page
 
-searchBar.addEventListener("keyup", function() {
+const search = () => {
     let tempData = [];
     let search = searchBar.value.toLowerCase();
 
@@ -70,8 +68,29 @@ searchBar.addEventListener("keyup", function() {
             searchQuery.appendChild(tempQuery)
         }
     }
-})
+}
 
+const searchBtnClick = () => {
+    let tempData = [];
+    let search = searchBar.value.toLowerCase();
+    for (const country of data) {
+        if(country.name.toLowerCase().includes(search)) {
+            tempData.push(country)
+        }
+    }
+    if(tempData.length === 1) {
+        printContentPage(tempData[0])
+    }
+}
+
+const randomPage = () => {
+    printContentPage(data[getRandom(0, data.length)]);
+}
+
+searchBar.addEventListener("keyup", search);
+searchBtn.addEventListener("click", searchBtnClick);
+randBtn[0].addEventListener("click", randomPage);
+randBtn[1].addEventListener("click", randomPage);
 // Title 
 
 let titleLetters = document.getElementsByTagName("span");
@@ -89,116 +108,74 @@ for (let i = 0; i < titleLetters.length; i++) {
 
 // Content page
 
-const printContentPage = (obj) => {
+bckBtn.addEventListener("click", () => {
+    homePage.classList.remove("hide");
+    contentPage.classList.add("hide");
+    searchBar.value = "";
+    searchContent.classList.add("hide")
+})
 
+const printContentPage = (obj) => {
     homePage.classList.add("hide");
-    contentPage.classList.remove("hide")
+    contentPage.classList.remove("hide");
 
     countryName.innerHTML = obj.name
     countryFlag.setAttribute("src", obj.flag)
 
     countryCapital.innerText = `Capital: ${obj.capital}`
 
+    countryInfo[2].innerText = "";
+    countryInfo[2].innerText = "";
+
     countryInfo[0].innerHTML = "Native Name: " + obj.nativeName
     countryInfo[1].innerHTML = "Population: " + obj.population.toLocaleString();
     countryInfo[2].innerText += `Region: ${obj.region}`
     countryInfo[2].innerText += `\nSub-Region: ${obj.subregion}`
 
+    countryCurrency.innerHTML = "";
+    const h3 = document.createElement("h3");
+    h3.innerText = "Currencies: "
+    countryCurrency.appendChild(h3)
     obj.currencies.forEach(e => {
         const div = document.createElement("div");
         const par = document.createElement("p");
-        par.innerText = `${e.name} {${e.symbol}}`;
+        par.innerText = `${e.name} ${e.symbol === null ? "" : e.symbol}`;
         div.appendChild(par)
+        
         countryCurrency.appendChild(div);
     })
 
-    obj.borders.forEach(e => {
-        data.forEach(x => {
-            if(e === x.alpha3Code) {
-
-                const mainDiv =  document.getElementsByClassName("borders-div")[0]
-                const div = document.createElement("div");
-                const img = document.createElement("img");
-                const par = document.createElement("p");
-                
-                img.classList.add("card-image")
-                img.setAttribute("src", x.flag);
-
-                par.classList.add("card-text")
-                par.innerText = x.name
-
-                div.classList.add("card-content")
-                div.addEventListener("click", () => {
-                    alert("click")
-                })
-
-                div.appendChild(img);
-                div.appendChild(par);
-
-               mainDiv.appendChild(div);
-
-            }
+    if(obj.borders.length === 0) {
+        document.getElementsByClassName("borders")[0].getElementsByTagName("h3")[0].innerText = "This country doesn't have any neighbours!"
+    } else {
+        obj.borders.forEach(e => {
+            data.forEach(x => {
+                if(e === x.alpha3Code) {
+                    const mainDiv =  document.getElementsByClassName("borders-div")[0]
+                    const div = document.createElement("div");
+                    const img = document.createElement("img");
+                    const par = document.createElement("p");
+                    
+                    img.classList.add("card-image")
+                    img.setAttribute("src", x.flag);
+    
+                    par.classList.add("card-text")
+                    par.innerText = x.name
+    
+                    div.classList.add("card-content")
+                    div.addEventListener("click", () => {
+                        scrollTo(0, 0)
+                        mainDiv.innerHTML = "";
+                        printContentPage(x)
+                    })
+    
+                    div.appendChild(img);
+                    div.appendChild(par);
+    
+                   mainDiv.appendChild(div);
+    
+                };
+            });
         });
-        
-    });
-}
-
-// setTimeout(() => {
-//     printContentPage(data[0])
-// }, 2000);
-
-// setTimeout(() => {
-
-//     countryName.innerHTML = data[0].name
-//     countryFlag.setAttribute("src", data[0].flag)
-
-//     countryCapital.innerText = `Capital: ${data[0].capital}`
-
-//     countryInfo[0].innerHTML = "Native Name: " + data[0].nativeName
-//     countryInfo[1].innerHTML = "Population: " + data[0].population.toLocaleString();
-//     countryInfo[2].innerText += `Region: ${data[0].region}`
-//     countryInfo[2].innerText += `\nSub-Region: ${data[0].subregion}`
-
-//     data[0].currencies.forEach(e => {
-//         const div = document.createElement("div");
-//         const par = document.createElement("p");
-//         par.innerText = `${e.name} {${e.symbol}}`;
-//         div.appendChild(par)
-//         countryCurrency.appendChild(div);
-//     })
-
-//     data[0].borders.forEach(e => {
-//         data.forEach(x => {
-//             if(e === x.alpha3Code) {
-
-//                 const mainDiv =  document.getElementsByClassName("borders-div")[0]
-//                 const div = document.createElement("div");
-//                 const img = document.createElement("img");
-//                 const par = document.createElement("p");
-                
-//                 img.classList.add("card-image")
-//                 img.setAttribute("src", x.flag);
-
-//                 par.classList.add("card-text")
-//                 par.innerText = x.name
-
-//                 div.classList.add("card-content")
-//                 div.addEventListener("click", () => {
-//                     alert("click")
-//                 })
-
-//                 div.appendChild(img);
-//                 div.appendChild(par);
-
-//                mainDiv.appendChild(div);
-
-//             }
-//         });
-        
-//     });
-// }, 2000);
-
-
-
-
-// COVID SECTION
+    };
+};
