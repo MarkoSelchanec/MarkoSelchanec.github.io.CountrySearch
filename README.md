@@ -1,2 +1,11 @@
-# MarkoSelchanec.github.io.test
- 
+# Country Search
+## About project
+Small scale project that can display a chosen country, or display a country at random. 
+## Technologies
+* HTML
+* CSS
+* JavaScript
+## Tools used
+Visual Studio Code
+## API resource
+`https://restcountries.eu/`
