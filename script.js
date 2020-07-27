@@ -147,7 +147,7 @@ const printContentPage = (obj) => {
     })
     
     if(obj.borders.length === 0) {
-        document.getElementsByClassName("borders")[0].getElementsByTagName("h3")[0].innerText = "This country doesn't have any neighbours!"
+        document.getElementsByClassName("borders")[0].appendChild(document.createElement("p")).innerText = "This country doesn't have any neighbours!"
     } else {
         obj.borders.forEach(e => {
             data.forEach(x => {
