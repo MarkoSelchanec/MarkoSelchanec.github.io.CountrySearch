@@ -4,7 +4,7 @@ const searchBar = document.getElementsByClassName("search-bar")[0];
 const searchContent = document.getElementsByClassName("search-content")[0];
 const searchQuery = document.getElementsByClassName("search-query")[0];
 const searchBtn = document.getElementById("country-search");
-const randBtn = document.getElementsByClassName("random-btn");
+const randBtn = [...document.getElementsByClassName("random-btn")];
 const link = "https://restcountries.eu/rest/v2/all";
 
 const contentPage = document.getElementsByClassName("content-div")[0];
@@ -46,28 +46,33 @@ const search = () => {
     searchQuery.innerHTML = "";
     if(tempData.length >= 8) {
         for (let i = 0; i < 7; i++) {
-            const tempQuery = document.createElement("a");
-            tempQuery.setAttribute("href", "#")
-            tempQuery.classList.add("search-query-block")
-            tempQuery.addEventListener("click", () => {
-                printContentPage(tempData[i])
-            })
-            tempQuery.innerText = tempData[i].name
-            searchQuery.appendChild(tempQuery)
+            searchBlockFill(tempData, i);
         }
     }
     if(tempData.length < 8) {
         for (let i = 0; i < tempData.length; i++) {
-            const tempQuery = document.createElement("a");
-            tempQuery.setAttribute("href", "#")
-            tempQuery.classList.add("search-query-block")
-            tempQuery.addEventListener("click", () => {
-                printContentPage(tempData[i])
-            })
-            tempQuery.innerText = tempData[i].name
-            searchQuery.appendChild(tempQuery)
+            searchBlockFill(tempData, i);
         }
     }
+    if(event.keyCode === 13 && tempData.length === 1) {
+        printContentPage(tempData[0]);
+    }
+    if(event.keyCode === 27) {
+        searchQuery.innerHTML = "";
+        searchContent.classList.add("hide")
+        searchBar.value = ""
+    }
+}
+
+const searchBlockFill = (tempArray, counter) => {
+    const tempQuery = document.createElement("a");
+    tempQuery.setAttribute("href", "#")
+    tempQuery.classList.add("search-query-block")
+    tempQuery.addEventListener("click", () => {
+        printContentPage(tempArray[counter])
+    })
+    tempQuery.innerText = tempArray[counter].name
+    searchQuery.appendChild(tempQuery)
 }
 
 const searchBtnClick = () => {
@@ -89,11 +94,11 @@ const randomPage = () => {
 
 searchBar.addEventListener("keyup", search);
 searchBtn.addEventListener("click", searchBtnClick);
-randBtn[0].addEventListener("click", randomPage);
-randBtn[1].addEventListener("click", randomPage);
+randBtn.forEach(e => e.addEventListener("click", randomPage));
+
 // Title 
 
-let titleLetters = document.getElementsByTagName("span");
+let titleLetters = [...document.getElementsByTagName("span")];
 const colors = ["red", "green", "royalblue", "purple", "orange"];
 
 const getRandom = (min, max) => {
@@ -102,9 +107,7 @@ const getRandom = (min, max) => {
     return Math.floor(Math.random() * (max - min)) + min; 
 }
 
-for (let i = 0; i < titleLetters.length; i++) {
-    titleLetters[i].style.color = colors[getRandom(0, colors.length)]
-}
+titleLetters.map(e => e.style.color = colors[getRandom(0, colors.length)]);
 
 // Content page
 
