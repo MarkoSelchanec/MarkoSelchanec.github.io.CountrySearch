@@ -112,6 +112,7 @@ bckBtn.addEventListener("click", () => {
     homePage.classList.remove("hide");
     contentPage.classList.add("hide");
     searchBar.value = "";
+    countryBorders.innerText = ""
     searchContent.classList.add("hide")
 })
 
@@ -144,7 +145,7 @@ const printContentPage = (obj) => {
         
         countryCurrency.appendChild(div);
     })
-
+    
     if(obj.borders.length === 0) {
         document.getElementsByClassName("borders")[0].getElementsByTagName("h3")[0].innerText = "This country doesn't have any neighbours!"
     } else {
