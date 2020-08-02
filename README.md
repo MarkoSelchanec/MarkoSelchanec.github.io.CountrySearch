@@ -2,15 +2,11 @@
 ## About project
 Small scale project that can display a chosen country, or display a country at random.
 ## Display
-Capital city
-
-native name of country, population, region and sub-region
-
-currencties
-
-bordering countries (Navigate by clicking the country)
-
-current COVID-19 statistics
+* capital city
+* native name of country, population, region and sub-region
+* currencties
+* bordering countries (Navigate by clicking the country)
+* current COVID-19 statistics
 ## Technologies
 * HTML
 * CSS
