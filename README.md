@@ -4,7 +4,7 @@ Small scale project that can display a chosen country, or display a country at r
 ## Display
 * capital city
 * native name of country, population, region and sub-region
-* currencties
+* currencies
 * bordering countries (Navigate by clicking the country)
 * current COVID-19 statistics
 ## Technologies
