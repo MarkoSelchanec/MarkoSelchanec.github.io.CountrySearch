@@ -1,80 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@200;400;700&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="img/head.png"/>
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@200;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="img/head.png" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Country Search</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="main-div">
+      <h1 class="title">
+        <span>c</span><span>o</span><span>u</span><span>n</span><span>t</span
+        ><span>r</span><span>y</span> <span>s</span><span>e</span><span>a</span
+        ><span>r</span><span>c</span><span>h</span>
+      </h1>
 
-        <h1 class="title">
-            <span>c</span><span>o</span><span>u</span><span>n</span><span>t</span><span>r</span><span>y</span>
-            <span>s</span><span>e</span><span>a</span><span>r</span><span>c</span><span>h</span>
-        </h1>
+      <div class="search-div">
+        <img
+          src="img/search-solid.svg"
+          alt="search icon"
+          class="search-ico filter"
+        />
+        <input type="text" spellcheck="false" class="search-bar" />
+        <div class="search-content hide">
+          <div class="search-query"></div>
 
-        <div class="search-div">
-            <img src="img/search-solid.svg" alt="search icon" class="search-ico filter">
-            <input type="text" spellcheck="false" class="search-bar">
-            <div class="search-content hide">
-
-                <div class="search-query">
-
-                </div>
-
-                <div>
-                    <button class="btn" id="country-search">country search</button>
-                    <button class="random-btn btn">surprise me!</button>
-                </div>
-                
-            </div>
-        </div>
-
-        <div class="button-div">
-            <button class="btn">country search</button>
+          <div>
+            <button class="btn" id="country-search">country search</button>
             <button class="random-btn btn">surprise me!</button>
+          </div>
         </div>
-        
+      </div>
+
+      <div class="button-div">
+        <button class="btn">country search</button>
+        <button class="random-btn btn">surprise me!</button>
+      </div>
     </div>
 
     <div class="content-div hide">
+      <div class="back-div">
+        <img class="back-btn" src="img/home-solid.svg" alt="back button" />
+      </div>
 
-        <div class="back-div">
-            <img class="back-btn" src="img/home-solid.svg" alt="back button">
-        </div>
-        
-        <div class="country-intro basic-setup">
-            <img src="" alt="country flag" id="country-flag" class="country-flag">
-            <h1 id="country-name" class="country-name"></h1>
+      <div class="country-intro basic-setup">
+        <img src="" alt="country flag" id="country-flag" class="country-flag" />
+        <h1 id="country-name" class="country-name"></h1>
+      </div>
+
+      <div class="capital basic-setup">
+        <h2></h2>
+      </div>
+
+      <div class="country-info basic-setup">
+        <p></p>
+        <p></p>
+        <p></p>
+      </div>
+
+      <div class="currency basic-setup"></div>
+
+      <div class="borders basic-setup">
+        <div class="borders-div"></div>
+      </div>
+
+      <div class="corona basic-setup">
+        <h3>Corona stats:</h3>
+        <div class="corona-no-stats hide">
+          <p>There are no stats for this country</p>
         </div>
 
-        <div class="capital basic-setup">
-            <h2></h2>
+        <div class="corona-div">
+          <div class="divider">
+            Cases
+          </div>
+          <div class="corona-cases-stats">
+            <p class="inline" id="cases-active">Active:</p>
+            <p class="inline" id="cases-critical">Critical:</p>
+            <p class="inline" id="cases-recovered">Recovered:</p>
+          </div>
+          <div class="divider">
+            Tests
+          </div>
+          <div class="corona-cases-stats">
+            <p class="inline" id="test-one-mil">Per one million:</p>
+            <p class="inline" id="test-total">Total:</p>
+          </div>
+          <div class="divider">
+            Deaths
+          </div>
+          <div class="corona-cases-stats last">
+            <p class="inline" id="deaths-one-mil">Per one million:</p>
+            <p class="inline" id="deaths-new">New:</p>
+            <p class="inline" id="deaths-total">Total:</p>
+          </div>
+          <br />
+          <small>updated every 15 minutes.</small>
         </div>
-        
-        <div class="country-info basic-setup">
-            <p></p>
-            <p></p>
-            <p></p>
-        </div>
-
-        <div class="currency basic-setup">
-            
-        </div>
-
-        <div class="borders basic-setup">
-            <h3>Borders: </h3>
-            <div class="borders-div">
-                
-            </div>
-        </div>
-
+      </div>
     </div>
-    
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
